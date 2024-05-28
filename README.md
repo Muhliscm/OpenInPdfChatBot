@@ -1,7 +1,17 @@
 # OpenInPdfChatBot
 
+1. Clone directory
+```
+git clone https://github.com/Muhliscm/OpenInPdfChatBot.git
 
-1. Build image
+```
+2. Change dir
+```
+cd OpenInPdfChatBot
+
+```
+
+3. Build image
 
 ```
 docker build -t openinpdfchatbot .
@@ -9,7 +19,7 @@ docker build -t openinpdfchatbot .
 ```
 
 
-2. Run With volumes
+4. Run With volumes
 
 ```
 docker run -v pdf_files:/app/pdf_files -it openinpdfchatbot
