@@ -31,16 +31,21 @@ conv_chain.create_conv_chain()
 def result_processor(bot_response):
     results = {}
     invalid_responses = ["no", "not enough information"]
+    question = bot_response.get('query')
+
+    results.update({"Question": question})
+
     result = bot_response.get('result')
-    if result in invalid_responses:
+    if result.lower() in invalid_responses:
         results.update(
             {"Answer": "I can only answer from the given documents"})
         return results
     else:
-        results.update({"Answer": result})
         references = []
+
+        results.update({"Answer": result})
         source_documents = bot_response["source_documents"]
-        print(bot_response)
+
         for document in source_documents:
             document_path = document.metadata['source']
             document_name = document_path.split("/")[-1]

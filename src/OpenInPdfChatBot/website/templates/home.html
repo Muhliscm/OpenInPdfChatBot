@@ -4,7 +4,6 @@
 {% endblock title %}
 {% block content %}
     <div>
-        {# <a href="./pdf_files/TRANSFORMERS.pdf" target ="_blank" >Open TRANSFORMERS.pdf< /a > #}
         <!-- Second heading and image -->
         <h1 align='center'>Ask Your Question to bot</h1>
         <form method='POST'>
@@ -25,22 +24,30 @@
         <div id="answer">
             {% if result %}
                 <div>
-                    <h2>Answer :{{ result.Answer }}</h2>
+                    <h1>Question: {{ result.Question }}</h1>
+                    <br>
+                    <h3>
+                        Answer :{{ result.Answer }}
+                    </h2>
                 </div>
-                <div>
-                    <h3>References:</h3>
-                    {% for ref in result.References %}
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="{{ url_for('views.serve_pdf', filename=ref['Document Name']) }}"
-                                   target="_blank">{{ ref["Document Name"] }}</a>
-                            </h5>
-                            <br>
-                            <p class="card-text">{{ ref.Paragraph }}</p>
-                        </div>
+                <br>
+                {% if result.References %}
+                    <div>
+                        <h3>References:</h3>
                         <br>
-                    {% endfor %}
+                        {% for ref in result.References %}
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="{{ url_for('views.serve_pdf', filename=ref['Document Name']) }}"
+                                       target="_blank">{{ ref["Document Name"] }}</a>
+                                </h5>
+                                <br>
+                                <p class="card-text">{{ ref.Paragraph }}</p>
+                            </div>
+                            <br>
+                        {% endfor %}
+                    </div>
                 {% endif %}
-            </div>
+            {% endif %}
         </div>
     {% endblock content %}
