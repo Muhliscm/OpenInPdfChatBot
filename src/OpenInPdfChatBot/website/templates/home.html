@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}
+    chat bot
+{% endblock title %}
+{% block content %}
+    <div>
+        {# <a href="./pdf_files/TRANSFORMERS.pdf" target ="_blank" >Open TRANSFORMERS.pdf< /a > #}
+        <!-- Second heading and image -->
+        <h1 align='center'>Ask Your Question to bot</h1>
+        <form method='POST'>
+            <textarea class="form-control" rows="5" id="question" name="question"></textarea>
+            <br>
+            <div align='center'>
+                <div>
+                    <button type="submit"  id="chat" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+            <br>
+            <div align="center">
+                <a href="/home">
+                    <button type="submit" class="btn btn-secondary">Ask Again</button>
+                </a>
+            </div>
+        </form>
+        <div id="answer">
+            {% if result %}
+                <div>
+                    <h2>Answer :{{ result.Answer }}</h2>
+                </div>
+                <div>
+                    <h3>References:</h3>
+                    {% for ref in result.References %}
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{{ url_for('views.serve_pdf', filename=ref['Document Name']) }}"
+                                   target="_blank">{{ ref["Document Name"] }}</a>
+                            </h5>
+                            <br>
+                            <p class="card-text">{{ ref.Paragraph }}</p>
+                        </div>
+                        <br>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    {% endblock content %}

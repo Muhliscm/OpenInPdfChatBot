@@ -1,0 +1,11 @@
+Flask==2.2.2
+langchain==0.2.1
+langchain_community==0.2.1
+langchain_core==0.2.1
+PyPDF2==3.0.1
+torch==2.3.0
+transformers==4.37.2
+werkzeug==2.2.2
+unstructured[pdf]
+chromadb
+sentence-transformers==2.3.1
